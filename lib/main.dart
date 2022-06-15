@@ -48,20 +48,27 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: FutureBuilder<Album>(
-          future: futureAlbum,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data!.title);
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
+      body: Column(
+        children: [
+          Center(
+            child: FutureBuilder<Album>(
+              future: futureAlbum,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.title);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
 
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          },
-        ),
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
+          ),
+
+          // for widget test
+          const Text('Testing'),
+        ],
       ),
     );
   }
